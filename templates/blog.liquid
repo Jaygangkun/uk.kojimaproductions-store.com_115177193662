@@ -1,0 +1,62 @@
+{% paginate blog.articles by 5 %}
+
+
+<section class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mx-auto text-center">
+        <h1>News</h1>
+      </div><!-- end .col-lg-6 -->
+    </div><!-- end .row -->
+  </div><!-- end .container -->
+</section>
+
+<section class="news">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        
+        {% for article in blog.articles %}
+        
+          <div class="article">
+
+            <h2 class="h3"><a href="{{ article.url }}">{{ article.title | upcase }}</a></h2>
+
+            {% if article.image %}
+              <a class="article__featured-image" href="{{ article.url }}">
+                {{ article | img_url: '1024x1024' | img_tag: article.title }}
+              </a>
+            {% endif %}
+            
+            <div class="rte">
+              {% if article.excerpt.size > 0 %}
+                {{ article.excerpt }}
+              {% else %}
+                <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+              {% endif %}
+            </div>
+
+          <p class="text-right">
+            <a href="{{ article.url }}" class="btn btn-black">{{ 'blogs.article.read_more' | t }} &rarr;</a>
+          </p>
+
+        </div><!-- end .article -->
+
+        {% unless forloop.last %}<hr>{% endunless %}
+
+      {% endfor %}
+
+      {% if paginate.pages > 1 %}
+        <hr>
+        <div class="pagination">
+          {{ paginate | default_pagination }}
+        </div>
+      {% endif %}
+        
+        
+      </div><!-- end .col-lg-8 -->
+    </div><!-- end .row -->
+  </div><!-- end .container -->
+</section>
+
+{% endpaginate %}

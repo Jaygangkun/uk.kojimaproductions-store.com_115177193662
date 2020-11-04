@@ -1,0 +1,101 @@
+{% if section.settings.mp4_background_video != '' %}
+	<section class="feature-band" {{ block.shopify_attributes }}>
+{% else %}
+	<section class="feature-band" style="background-image: url({{ section.settings.background_image | img_url: "1400x600" }});" {{ block.shopify_attributes }}>
+{% endif %}
+  
+  <video loop muted autoplay poster="{{ section.settings.background_image | img_url: "1400x600" }}" class="fullscreen-video">
+      <source src="{{ section.settings.webm_background_video }}" type="video/webm">
+      <source src="{{ section.settings.mp4_background_video }}" type="video/mp4">
+      <source src="{{ section.settings.ogv_background_video }}" type="video/ogg">
+  </video>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>{{ section.settings.section_title }}</h2>
+        
+        {% if section.settings.button_link %}
+        	<a href="{{ section.settings.button_link }}" class="btn btn-primary">{{ section.settings.button_text }}</a>
+        {% endif %}
+        
+      </div><!-- end .col-lg-6 -->
+    </div><!-- end .row -->
+  </div><!-- end .container -->
+</section>
+
+{% schema %}
+  {
+    "name": "Feature Band",
+	"settings": [
+		{
+			"id": "section_title",
+			"type": "text",
+			"label": "Section Title"
+		},
+      	{
+      		"id": "section_text_color",
+      		"type": "select",
+      		"label": "Section Text Color",
+      		"options": [
+               {
+                 "value": "dark",
+                 "label": "Dark"
+               },
+               {
+                 "value": "light",
+                 "label": "Light"
+               }
+             ]
+      	},
+		{
+			"id": "button_text",
+			"type": "text",
+			"label": "Button Text"
+		},
+		{
+			"id": "button_link",
+			"type": "url",
+			"label": "Button Link"
+		},
+		{
+			"id": "background_image",
+			"type": "image_picker",
+			"label": "Background Image",
+			"info": "If the video URLs are filled out below, they will take precedence over the background image."
+		},
+		{
+			"id": "mp4_background_video",
+			"type": "text",
+			"label": "MP4 Background Video Source URL"
+		},
+		{
+			"id": "webm_background_video",
+			"type": "text",
+			"label": "WEBM Background Video Source URL"
+		},
+		{
+			"id": "ogv_background_video",
+			"type": "text",
+			"label": "OGV Background Video Source URL"
+		}
+	],
+	"presets": [
+      {
+        "category": "Featured",
+        "name": "Feature Band"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+      {% if section.settings.section_text_color == 'light' %}
+      	.feature-band h2, .feature-band .h2 { color: #ffffff; }
+      	.feature-band .btn-primary { background: #ffffff; color: #000000; }
+      	.feature-band .btn-primary:hover { background: #ffffff !important; opacity: .8 !important; color: #000000 !important; }
+      {% endif %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

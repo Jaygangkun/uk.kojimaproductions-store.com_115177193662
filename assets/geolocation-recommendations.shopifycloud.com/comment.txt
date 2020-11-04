@@ -1,0 +1,16 @@
+https://uk.kojimaproductions-store.com/browsing_context_suggestions.json?source=geolocation_recommendation&currency[enabled]=true&currency[exclude]=GBP&language[enabled]=true&language[exclude]=en&country[enabled]=true
+
+>>response
+{"detected_values":{"country_name":"United States","country":{"handle":"US","name":"United States"}},"suggestions":[{"parts":{"currency":{"handle":"USD","name":"US dollars","confidence":1.0,"options":{"AUD":"AUD A$","CAD":"CAD $","DKK":"DKK kr","EUR":"EUR €","GBP":"GBP £","HKD":"HKD HK$","JPY":"JPY ¥","NZD":"NZD $","SGD":"SGD $","USD":"USD $"}}},"confidence":1.0}]}
+
+
+https://uk.kojimaproductions-store.com/browsing_context_suggestions.json?source=geolocation_recommendation&currency[enabled]=true&currency[exclude]=GBP&language[enabled]=true&country[enabled]=true
+
+>>response
+{"detected_values":{"country_name":"United States","country":{"handle":"US","name":"United States"}},"suggestions":[{"parts":{"currency":{"handle":"USD","name":"US dollars","confidence":1.0,"options":{"AUD":"AUD A$","CAD":"CAD $","DKK":"DKK kr","EUR":"EUR €","GBP":"GBP £","HKD":"HKD HK$","JPY":"JPY ¥","NZD":"NZD $","SGD":"SGD $","USD":"USD $"}},"language":{"handle":"en","name":"English","confidence":1.0,"options":{"de":"German","en":"English","fr":"French","ru":"Russian"}}},"confidence":1.0}]}
+
+
+https://uk.kojimaproductions-store.com/browsing_context_suggestions.json?source=geolocation_recommendation&currency[enabled]=true&currency[exclude]=GBP&language[enabled]=true&language[exclude]=&country[enabled]=true
+
+>>response
+{"detected_values":{"country_name":"United States","country":{"handle":"US","name":"United States"}},"suggestions":[{"parts":{"currency":{"handle":"USD","name":"US dollars","confidence":1.0,"options":{"AUD":"AUD A$","CAD":"CAD $","DKK":"DKK kr","EUR":"EUR €","GBP":"GBP £","HKD":"HKD HK$","JPY":"JPY ¥","NZD":"NZD $","SGD":"SGD $","USD":"USD $"}},"language":{"handle":"en","name":"English","confidence":1.0,"options":{"de":"German","en":"English","fr":"French","ru":"Russian"}}},"confidence":1.0}]}

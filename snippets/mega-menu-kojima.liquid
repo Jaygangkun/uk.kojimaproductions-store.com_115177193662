@@ -1,0 +1,31 @@
+<div id="kojima-productions" class="mega-menu-container">
+  <div class="container">
+    <div class="row justify-content-md-center">
+
+      <div class="col-lg-3">
+        <ul>
+          {% for link in linklists.kojima-mega-menu-apparel.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div><!-- end .col-lg-3 -->
+
+      <div class="col-lg-3">
+        <ul>
+          {% for link in linklists.kojima-mega-menu-accesories.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div><!-- end .col-lg-3 -->
+
+      <div class="col-lg-3">
+          <ul>
+          {% for link in linklists.kojima-mega-menu-collectables.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div><!-- end .col-lg-3 -->
+
+    </div><!-- end .row -->
+  </div><!-- end .container -->
+</div><!-- end .mega-menu-container -->

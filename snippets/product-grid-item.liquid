@@ -1,0 +1,60 @@
+{% comment %}
+  Check if the product is on sale and set a variable to be used below.
+{% endcomment %}
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% comment %}
+  Check if the product is sold out and set a variable to be used below.
+{% endcomment %}
+{% assign sold_out = true %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+<div class="col-lg-4">
+
+  <a href="{{ product.url | within: collection }}" class="product-image">
+    <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+    
+    {% if product.images[1] %}
+    <div class="reveal">
+   		<img src="{{ product.images[1] | product_img_url: 'large' }}" alt="{{ product.images[1].alt | escape }}">
+    </div><!-- end .reveal -->
+    {% endif %}
+    
+  </a>
+
+  <div class="product-name">
+    <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+  </div><!-- end .product-name -->
+  
+  <div class="product-price">
+    {% if on_sale %}
+      {% if product.price_varies %}
+        {% assign sale_price = product.price | money %}
+        {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+      {% else %}
+        <strong>{{ 'products.product.on_sale' | t }}</strong>
+        {{ product.price | money }}
+      {% endif %}
+    {% else %}
+      {% if product.price_varies %}
+        {% assign price = product.price | money %}
+        {{ 'products.general.from_text_html' | t: price: price }}
+      {% else %}
+        {{ product.price | money }}
+      {% endif %}
+    {% endif %}
+    {% if sold_out %}
+      <br><strong>{{ 'products.product.sold_out' | t }}</strong>
+    {% endif %}
+    {% if on_sale %}
+      <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+      <br><s>{{ product.compare_at_price | money }}</s>
+    {% endif %}
+  </div><!-- end .product-price -->
+
+{% include 'preorder-now-collection-item' %}</div><!-- end .col-lg-4 -->

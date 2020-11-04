@@ -1,0 +1,30 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<!-- /snippets/blog-sidebar.liquid -->
+{% comment %}
+  Recent blog posts
+{% endcomment %}
+<h3 class="h4">{% comment %}ly_i18n_replace_for_[ 'blogs.sidebar.recent_articles' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'blogs.sidebar.recent_articles' | t }}{% endcapture %}{% include 'ly-static-string' with '11500351' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</h3>
+<ul class="no-bullets">
+  {% for article in blogs[blog.handle].articles limit:6 %}
+    <li>
+      <a href="{{ article.url }}">{% comment %}ly_code_replace_for_[ article.title ]_begin{% endcomment %}{% include 'ly-title' with article %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</a>
+      <br>
+      <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>
+    </li>
+  {% endfor %}
+</ul>
+
+{% comment %}
+  Blog tags
+{% endcomment %}
+{% if blog.all_tags.size > 0 %}
+  <h3 class="h4">{% comment %}ly_i18n_replace_for_[ 'blogs.sidebar.categories' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'blogs.sidebar.categories' | t }}{% endcapture %}{% include 'ly-static-string' with '11500352' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</h3>
+  <ul class="no-bullets">
+    {% for tag in blog.all_tags %}
+      {% if current_tags contains tag %}
+      <li>{{ tag }}</li>
+      {% else %}
+      <li>{{ tag | link_to_tag: tag }}</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}

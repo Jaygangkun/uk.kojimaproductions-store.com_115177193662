@@ -1,0 +1,105 @@
+<section class="hero-slider">
+  
+  {% for block in section.blocks %}
+  	
+  	<div class="slide" style="background-image: url({{ block.settings.slide_image | img_url: "1400x" }}); padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;" {{ block.shopify_attributes }}>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-left">
+            {% if block.settings.slide_title %}
+            	<h2 style="color: {{ block.settings.slide_font_color }};">{{ block.settings.slide_title }}</h2>
+           	{% endif %}
+            
+            {% if block.settings.slide_link %}
+            	{% assign class = block.settings.slide_button_color %}
+            
+            	<a href="{{ block.settings.slide_link }}" class="btn btn-{{ class }}">{{ block.settings.slide_link_text }}</a>
+            {% endif %}
+            
+          </div><!-- end .col-lg-12 -->
+        </div><!-- end .row -->
+      </div><!-- end .container -->
+    </div><!-- end .slide -->
+  
+  {% endfor %}
+  
+</section>
+
+{% schema %}
+  {
+    "name": "Hero Slider",
+	"blocks": [
+      {
+        "type": "hero-slider",
+        "name": "Slides",
+        "settings": [
+          {
+            "id": "slide_image",
+            "type": "image_picker",
+            "label": "Slide Background"
+          },
+		  {
+			"id": "slide_font_color",
+			"type": "color",
+			"label": "Font Color"
+		  },
+		  {
+			"id": "slide_button_color",
+			"type": "select",
+			"label": "Button Color",
+			"options": [
+               {
+                 "value": "black",
+                 "label": "Black"
+               },
+               {
+                 "value": "white",
+                 "label": "White"
+               }
+             ],
+             "default": "black"
+		  },
+		  {
+			"id": "slide_title",
+			"type": "text",
+			"label": "Slide Title"
+		  },
+		  {
+			"id": "slide_link_text",
+			"type": "text",
+			"label": "Slide Link Text"
+		  },
+		  {
+			"id": "slide_link",
+			"type": "url",
+			"label": "Slide Link"
+		  },
+		  {
+			"id": "padding_top",
+			"type": "text",
+			"label": "Padding Top",
+			"default": "175"
+		  },
+		  {
+			"id": "padding_bottom",
+			"type": "text",
+			"label": "Padding Bottom",
+			"default": "175"
+		  }
+        ]
+      }
+    ],
+	"presets": [
+      {
+        "category": "Slider",
+        "name": "Hero Slider"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

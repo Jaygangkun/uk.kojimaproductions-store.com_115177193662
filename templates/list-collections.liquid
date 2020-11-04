@@ -1,0 +1,41 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<!-- /templates/list-collections.liquid -->
+{% comment %}
+
+  This page represents the /collections and /products pages.
+  It is an optional, but highly recommended, template for your theme.
+
+  More info:
+    - http://docs.shopify.com/manual/configuration/store-customization/taking-control-of-collections-listing
+
+{% endcomment %}
+
+{% include 'breadcrumb' %}
+
+{% comment %}
+  Loop through each collection, except 'frontpage'
+{% endcomment %}
+{% for collection in collections %}
+
+  {% unless collection.handle == 'frontpage' %}
+
+    {% capture collection_title %}{% comment %}ly_code_replace_for_[ collection.title | escape ]_begin{% endcomment %}{% include 'ly-title' with collection %}{{ ly_translation | escape }}{% comment %}ly_code_replace_end{% endcomment %}{% endcapture %}
+
+    <div class="section-header">
+      <p class="h1 section-header__left">{{ collection_title }}</p>
+      <div class="section-header__right">
+        <a href="{{ collection.url }}" title="{% comment %}ly_i18n_replace_for_[ 'collections.general.link_title' | t: title: collection_title ]_begin{% endcomment %}{% capture ly_template %}{{ 'collections.general.link_title' | t: title: collection_title }}{% endcapture %}{% include 'ly-static-string' with '11500575' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% assign replacement = collection_title  %}{% assign ly_template = ly_template | replace: '[[title]]', replacement %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}"><ly-as-11500573>More</ly-as-11500573> {{ collection_title }} ›</a>
+      </div>
+    </div>
+
+    <div class="grid-uniform">
+      {% for product in collection.products limit:5 %}
+        {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
+        {% include 'product-grid-item' %}
+      {% endfor %}
+    </div>
+
+    {% unless forloop.last %}<hr>{% endunless %}
+
+  {% endunless %}
+
+{% endfor %}

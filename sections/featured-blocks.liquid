@@ -1,0 +1,119 @@
+<section class="featured-blocks" {{ block.shopify_attributes }}>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mx-auto text-center">
+        <h2>{{ section.settings.section_title }}</h2>
+        <p>{{ section.settings.section_description }}</p>
+      </div><!-- end .col-lg-12 -->
+    </div><!-- end .row -->
+    
+    <div class="row">
+      
+      {% assign block_size = section.blocks | size %}
+      
+      {% for block in section.blocks %}
+      
+      	{% if block_size == 3 %}
+			{% assign column_class = 'col-lg-4' %}
+		{% elsif block_size == 4 %}
+      		{% assign column_class = 'col-lg-3' %}
+      	{% endif %}
+      
+        <div class="{{ column_class }}">
+          <div class="feature-block" style="background-image: url({{ block.settings.image | img_url: "600x" }});">
+            
+            {% if block.settings.news_item == true %}
+            	<div class="news-badge">NEWS</div>
+            {% endif %}
+            
+            {% if block.settings.block_sub_title != blank %}
+            	<div class="subtitle" style="color: {{ block.settings.font_color }};">{{ block.settings.block_sub_title }}</div>
+           	{% endif %}
+            
+            <div class="title" style="color: {{ block.settings.font_color }};">{{ block.settings.block_title }}</div>
+            
+            {% if block.settings.read_more_link != blank %}
+            	<a href="{{ block.settings.read_more_link }}" class="btn btn-white">{{ block.settings.read_more_text }}</a>
+           	{% endif; %}
+            
+          </div><!-- end .freature-block -->
+        </div><!-- end .col-lg-4 -->
+      {% endfor %}
+    </div><!-- end .row -->
+    
+  </div><!-- end .container -->
+</section>
+
+{% schema %}
+  {
+    "name": "Featured Blocks",
+	"max_blocks": 4,
+	"settings": [
+		{
+			"id": "section_title",
+			"type": "text",
+			"label": "Section Title"
+		},
+		{
+			"id": "section_description",
+			"type": "textarea",
+			"label": "Section Description"
+		}
+	],
+	"blocks": [
+      {
+        "type": "featured-blocks",
+        "name": "Featured Blocks",
+        "settings": [
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Background"
+          },
+		  {
+			"id": "font_color",
+			"type": "color",
+			"label": "Font Color"
+		  },
+		  {
+			"id": "news_item",
+			"type": "checkbox",
+			"label": "Is this a news item?"
+		  },
+		  {
+			"id": "block_sub_title",
+			"type": "text",
+			"label": "Block Sub-Title"
+		  },
+		  {
+			"id": "block_title",
+			"type": "text",
+			"label": "Block Title"
+		  },
+		  {
+			"id": "read_more_text",
+			"type": "text",
+			"label": "Read More Link Text"
+		  },
+		  {
+			"id": "read_more_link",
+			"type": "text",
+			"label": "Read More Link"
+		  }
+        ]
+      }
+    ],
+	"presets": [
+      {
+        "category": "Featured",
+        "name": "Featured Blocks"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
