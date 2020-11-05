@@ -70,7 +70,10 @@ window.supported_currencies = "{{ settings.mlvedaACS_supportedCurrencies }}";
 
 
 <body id="{{ langify_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
-  
+  <div class="language-switch-container">
+    <span class="ly-custom-1000"></span>
+    <span class=money>£{{amount}} GBP</span>
+  </div>
   <div id="NavDrawer" class="drawer drawer--left">
     <div class="drawer__header">
       <div class="drawer__title h3">{% comment %}ly_i18n_replace_for_[ 'layout.drawers.browse' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'layout.drawers.browse' | t }}{% endcapture %}{% include 'ly-static-string' with '11500323' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</div>
@@ -464,5 +467,5 @@ window.supported_currencies = "{{ settings.mlvedaACS_supportedCurrencies }}";
 
 {% include 'mlveda-currencies-switcher' %}{% include 'mlveda-currencies' %}{% include 'geolizr-redirect' %}
   {% render 'preorder-now' %}
-  {% render 'th-bundle-product' %}{% comment %}ly_liquid_scripts_begin{% endcomment %}{% endcapture %}{% render 'ly-liquid-scripts' content: ly_liquid_content %}{% comment %}ly_liquid_scripts_end{% endcomment %}{% comment %}ly_core_scripts_begin{% endcomment %}{% render 'ly-core-scripts' %}{% comment %}ly_core_scripts_end{% endcomment %}{% comment %}ly_switcher_factory_begin{% endcomment %}{% render 'ly-switcher-factory' %}{% comment %}ly_switcher_factory_end{% endcomment %}</body>
+  {% render 'th-bundle-product' %}{% comment %}ly_liquid_scripts_begin{% endcomment %}{% endcapture %}{% render 'ly-liquid-scripts' content: ly_liquid_content %}{% comment %}ly_liquid_scripts_end{% endcomment %}{% comment %}ly_core_scripts_begin{% endcomment %}{% render 'ly-core-scripts' %}{% comment %}ly_core_scripts_end{% endcomment %}{% comment %}ly_switcher_factory_begin{% endcomment %}{% render 'ly-switcher-factory' %}{% comment %}ly_switcher_factory_end{% endcomment %}{% include 'mlveda-flag' %}{% include 'mlveda-currencies-style' %}</body>
 </html>
